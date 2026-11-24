@@ -1,0 +1,68 @@
+
+python3 - <<'PY'
+from pathlib import Path
+
+file = Path("index.html")
+html = file.read_text(encoding="utf-8")
+
+# Update professional profile
+html = html.replace(
+    "E-commerce Executive and Digital Marketing Specialist",
+    "E-commerce Manager and Digital Marketing Specialist"
+)
+
+html = html.replace(
+    "E-commerce Executive | Digital Marketing Specialist",
+    "E-commerce Manager | Digital Marketing Specialist"
+)
+
+html = html.replace(
+    "Abdul Salam — E-commerce & Digital Marketing",
+    "Abdul Salam — E-commerce Manager & Marketplace Specialist"
+)
+
+# Update current experience and insert Yellow Diamond
+old_start = '''        <div class="timeline">
+          <article class="timeline-item">'''
+
+new_start = '''        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-date"><span>Jul 2026</span><span>Present</span></div>
+            <div class="timeline-marker" aria-hidden="true"><span></span></div>
+            <div class="timeline-content">
+              <p class="timeline-role">E-commerce Manager</p>
+              <h3>Yellow Diamond General Trading LLC</h3>
+              <p class="timeline-location">Dubai, UAE <span>·</span> E-commerce &amp; Marketplace Management</p>
+              <ul>
+                <li>Manage multi-marketplace e-commerce operations across Amazon UAE and KSA, Noon UAE and KSA, FirstCry, Careem and Carrefour.</li>
+                <li>Oversee product catalog management, product uploads, listing optimization, titles, descriptions, attributes and marketplace content.</li>
+                <li>Coordinate inventory updates, pricing, purchase orders, shipments and stock availability across sales channels.</li>
+                <li>Manage marketplace cases, compliance requirements, account operations and issue resolution.</li>
+                <li>Coordinate product photography, main images, lifestyle images and visual content optimization.</li>
+                <li>Monitor marketplace operations and coordinate with warehouse, suppliers and internal teams to support business performance.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="timeline-item">'''
+
+if old_start not in html:
+    raise SystemExit("ERROR: Experience section not found. No changes saved.")
+
+html = html.replace(old_start, new_start, 1)
+
+# Update previous employment end date
+html = html.replace(
+    '<span>Dec 2023</span><span>Present</span>',
+    '<span>Dec 2023</span><span>Jun 2026</span>',
+    1
+)
+
+file.write_text(html, encoding="utf-8")
+
+print("SUCCESS: Portfolio employment details updated.")
+print("Current: Yellow Diamond General Trading LLC")
+print("Position: E-commerce Manager")
+print("Duration: July 2026 - Present")
+print("Previous role end date: June 2026")
+PY
